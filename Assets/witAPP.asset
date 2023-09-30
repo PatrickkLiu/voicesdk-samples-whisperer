@@ -1,0 +1,460 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae5a46bda3295124c99b0e6537ac7252, type: 3}
+  m_Name: witAPP
+  m_EditorClassIdentifier: 
+  _clientAccessToken: K3UR4JUTCR56KURBI7K2ACL22ITEWIT5
+  _appInfo:
+    name: samplet
+    id: b5df2fbd-9f30-450b-ab72-bd825291c426
+    lang: en
+    isPrivate: 1
+    createdAt: 2023-08-20T11:43:32-0700
+    trainingStatus: 1
+    lastTrainDuration: 168
+    lastTrainedAt: 2023-08-20T11:50:24-0700
+    nextTrainAt: 2023-08-20T11:47:36-0700
+    intents:
+    - id: 6580981681967181
+      name: ask_bird_name
+      entities: []
+    - id: 1148258666576969
+      name: bird_song
+      entities: []
+    - id: 966181548011483
+      name: change_station
+      entities: []
+    - id: 138095012684881
+      name: close
+      entities: []
+    - id: 1396917737523984
+      name: drop
+      entities: []
+    - id: 290573883589023
+      name: hello
+      entities: []
+    - id: 1337279700542643
+      name: hello_there
+      entities: []
+    - id: 999757988116280
+      name: help
+      entities: []
+    - id: 1260972881282549
+      name: jump
+      entities:
+      - name: direction:direction
+        id: 974286260564016
+      - name: move_strength:move_strength
+        id: 1333157317284779
+    - id: 1513233722809220
+      name: levitate
+      entities: []
+    - id: 838535061055956
+      name: move
+      entities:
+      - name: direction:direction
+        id: 974286260564016
+      - name: move_strength:move_strength
+        id: 1333157317284779
+    - id: 3249291408704017
+      name: open
+      entities: []
+    - id: 965929217796930
+      name: polly_want_cracker
+      entities: []
+    - id: 1649553048864690
+      name: pretty_bird
+      entities: []
+    - id: 971115934113531
+      name: pull
+      entities:
+      - name: direction:direction
+        id: 974286260564016
+      - name: move_strength:move_strength
+        id: 1333157317284779
+    - id: 256909710510811
+      name: push
+      entities:
+      - name: direction:direction
+        id: 974286260564016
+      - name: move_strength:move_strength
+        id: 1333157317284779
+    - id: 1719942745108003
+      name: say_something
+      entities:
+      - name: something:something
+        id: 322707660205845
+    - id: 617059340591907
+      name: select_color
+      entities:
+      - name: color:color
+        id: 2133395096864187
+    - id: 966398554617647
+      name: select_seed
+      entities:
+      - name: color:color
+        id: 2133395096864187
+    - id: 1257369798299493
+      name: turn_off
+      entities:
+      - name: direction:direction
+        id: 974286260564016
+    - id: 1036659070615849
+      name: turn_off_radio
+      entities: []
+    - id: 187104487605336
+      name: turn_off_water
+      entities: []
+    - id: 1687710675075969
+      name: turn_on
+      entities: []
+    - id: 318373664016987
+      name: turn_on_radio
+      entities: []
+    - id: 2300637886790289
+      name: turn_on_water
+      entities: []
+    - id: 302964305722094
+      name: wake_up_bea
+      entities: []
+    entities:
+    - name: color
+      id: 6415184135196865
+      lookups:
+      - keywords
+      roles:
+      - name: color
+        id: 2133395096864187
+      keywords:
+      - keyword: blue
+        synonyms:
+        - blue
+      - keyword: red
+        synonyms:
+        - red
+      - keyword: yellow
+        synonyms:
+        - yellow
+    - name: direction
+      id: 618069947126105
+      lookups:
+      - keywords
+      roles:
+      - name: direction
+        id: 974286260564016
+      keywords:
+      - keyword: across
+        synonyms:
+        - across
+      - keyword: away
+        synonyms:
+        - away
+        - back
+        - backwards
+      - keyword: bottom
+        synonyms:
+        - bottom
+      - keyword: close
+        synonyms:
+        - close
+      - keyword: closer
+        synonyms:
+        - closer
+      - keyword: closer to me
+        synonyms:
+        - closer to me
+      - keyword: here
+        synonyms:
+        - here
+      - keyword: left
+        synonyms:
+        - left
+      - keyword: me
+        synonyms:
+        - me
+      - keyword: me
+        synonyms:
+        - me
+      - keyword: me
+        synonyms:
+        - me
+      - keyword: right
+        synonyms:
+        - right
+        - write
+      - keyword: the wall
+        synonyms:
+        - the wall
+      - keyword: to me
+        synonyms:
+        - me
+        - to me
+      - keyword: toward
+        synonyms:
+        - closer
+        - closer to me
+        - forward
+        - here
+        - this way
+        - toward
+      - keyword: up
+        synonyms:
+        - in the air
+        - to the ceiling
+        - to the sky
+        - up
+      - keyword: wall
+        synonyms:
+        - the wall
+      - keyword: write
+        synonyms:
+        - write
+    - name: move_strength
+      id: 1245826876115603
+      lookups:
+      - keywords
+      roles:
+      - name: move_strength
+        id: 1333157317284779
+      keywords:
+      - keyword: Blast
+        synonyms:
+        - blast
+      - keyword: Shoot
+        synonyms:
+        - shoot
+      - keyword: Shove
+        synonyms:
+        - shove
+      - keyword: Throw
+        synonyms:
+        - throw
+      - keyword: a little
+        synonyms:
+        - a little
+      - keyword: a little
+        synonyms:
+        - a little
+      - keyword: a little
+        synonyms:
+        - a little
+      - keyword: a little bit
+        synonyms:
+        - a little bit
+      - keyword: a lot
+        synonyms:
+        - a lot
+      - keyword: all the way
+        synonyms:
+        - all the way
+      - keyword: high
+        synonyms:
+        - high
+      - keyword: normal
+        synonyms:
+        - normal
+      - keyword: quickly
+        synonyms:
+        - quickly
+      - keyword: slowly
+        synonyms:
+        - slowly
+      - keyword: strong
+        synonyms:
+        - a lot
+        - all the way
+        - blast
+        - fire
+        - high
+        - shoot
+        - shove
+        - strong
+        - throw
+      - keyword: weak
+        synonyms:
+        - a little
+        - a little bit
+        - just a touch
+        - slightly
+        - weak
+    - name: something
+      id: 635965638323991
+      lookups:
+      - free-text
+      - keywords
+      roles:
+      - name: something
+        id: 322707660205845
+      keywords:
+      - keyword: I'm a wise companion animal
+        synonyms:
+        - i'm a wise companion animal
+      - keyword: my name is Harold
+        synonyms:
+        - my name is harold
+    traits:
+    - name: open_close
+      id: 222442800758155
+      values: []
+    - name: wit$on_off
+      id: 0fee6829-35ce-42b3-8f26-5ebebf40adab
+      values:
+      - id: 1806827899496964
+        value: off
+      - id: 4249815845100592
+        value: on
+    voices:
+    - name: Cael
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Cam
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Carl
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Charlie
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - fast
+      - projected
+    - name: Cody
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Connor
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Cooper
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Prospector
+      locale: en_US
+      gender: male
+      styles:
+      - default
+    - name: Railey
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Rebecca
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Remi
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Rubie
+      locale: en_US
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Vampire
+      locale: en_US
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Colin
+      locale: en_CA
+      gender: male
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+    - name: Rosie
+      locale: en_CA
+      gender: female
+      styles:
+      - default
+      - soft
+      - formal
+      - fast
+      - projected
+  _configurationId: e93248a3-33e6-43fd-b136-d211fd7040f4
+  timeoutMS: 10000
+  endpointConfiguration:
+    uriScheme: 
+    authority: 
+    port: 0
+    witApiVersion: 
+    speech: 
+    message: 
+    dictation: 
+  isDemoOnly: 0
+  useConduit: 1
+  _manifestLocalPath: ConduitManifest-eacc28b7-fe57-4bc2-933d-3e735409d9c7.json
+  excludedAssemblies: []
+  relaxedResolution: 0

@@ -38,13 +38,13 @@ namespace Whisperer
         {
             base.Start();
 
-            _speakGestureWatcher.AllowSpeak = !_levelLogicEnabled;
+            _speakGestureWatcher.AllowSpeak = !_levelLogicEnabled; // If no logic, user can freely speak
 
-            if (_levelLogicEnabled)
+            if (_levelLogicEnabled) 
             {
                 _allListenableScripts.ForEach(l => l.SetListeningActive(false));
                 _allListenableScripts.ForEach(l => l.OnDestroyed.AddListener(RemoveFromLists));
-            }
+            } //if no logic, all the lisitenable would be active
 
             UXManager.Instance.SetDisplayEnabled("SettingsMenu", true);
         }
@@ -73,12 +73,13 @@ namespace Whisperer
         private IEnumerator LevelRoutine()
         {
             yield return new WaitForSeconds(1);
-
+            /*
             yield return new WaitForSeconds(
                 AudioManager.Instance.Play("Narrator_Intro", transform));
 
             yield return new WaitForSeconds(
                 AudioManager.Instance.Play("Narrator_Intro_2", transform));
+            */
 
             _speakGestureWatcher.AllowSpeak = true;
             while (!_speakGestureWatcher.HaveSpeakPose) yield return null;

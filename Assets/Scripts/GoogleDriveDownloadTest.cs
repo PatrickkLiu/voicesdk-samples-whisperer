@@ -14,7 +14,7 @@ public class GoogleDriveDownloadTest : MonoBehaviour
     CustomizedPlyImporter customizedPlyImporter;
 
     //public VisualEffect pointcloudvfx;
-    puiblic GameObject VfxPrefab;
+    public GameObject VfxPrefab;
 
     /// variables for list files
     private GoogleDriveFiles.ListRequest listRequest;
@@ -177,6 +177,7 @@ public class GoogleDriveDownloadTest : MonoBehaviour
             print(data.positionMap);
             print(data.colorMap);
             GameObject newVFX = Instantiate(VfxPrefab, transform.position, Quaternion.identity) as GameObject;
+            VisualEffect pointcloudvfx = newVFX.GetComponent<VisualEffect>();
             pointcloudvfx.SetTexture("ColorMap",data.colorMap);
             pointcloudvfx.SetTexture("PositionMap",data.positionMap);
         }

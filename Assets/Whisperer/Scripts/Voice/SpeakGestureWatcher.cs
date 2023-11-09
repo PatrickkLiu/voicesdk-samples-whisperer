@@ -69,6 +69,8 @@ namespace Whisperer
 
         public Vector3 RaycastDirection { get; private set; }
 
+        #region Pose Checking
+
         private void PoseCheck()
         {
             var leftDist = Vector3.Distance(_leftHand.position, _speakGesturePoint.position);
@@ -101,6 +103,7 @@ namespace Whisperer
         {
             SetHandOutline(_leftHand, true);
             SetHandOutline(_rightHand, true);
+            //highlight the hand 
         }
 
         private void CancelSpeakPose()
@@ -118,7 +121,10 @@ namespace Whisperer
                 SetSelectedListenable(null);
             }
         }
+        #endregion
 
+
+        #region Listenable Selection:
         private void LookForListenables()
         {
             var isEditorDebugKey = false;
@@ -149,6 +155,9 @@ namespace Whisperer
                 if (_haveListenable) SetSelectedListenable(null);
             }
         }
+        #endregion
+
+        #region Listenable Handling:
 
         private void SetSelectedListenable(Listenable listenable)
         {
@@ -181,6 +190,9 @@ namespace Whisperer
 
             if (listenable is null) _selectLocked = false;
         }
+        #endregion
+
+        #region functions buidling on SetSelectedListenable
         IEnumerator UnselectListenableAfterDelay()
         {
             yield return new WaitForSeconds(1.5f);
@@ -208,6 +220,8 @@ namespace Whisperer
             o.HighlightColor = _castMode ? Color.red : new Color(0, 1, 59 / 255);
             o.EnableHighlight(activated);
         }
+
+        #endregion
 
         #region For Fun
 
@@ -265,6 +279,8 @@ namespace Whisperer
             if (_haveSpeakPose)
                 LookForListenables();
             
+
+            
             if (!_haveListenable)
             {
                 // show raycast
@@ -287,6 +303,7 @@ namespace Whisperer
             {
                 _speakGestureVisualizer.transform.position = _selectedListenable.transform.position;
             }
+            
         }
 
         #endregion

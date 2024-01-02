@@ -23,9 +23,9 @@ namespace Whisperer
         [SerializeField] private Transform _leftHand;
         [SerializeField] private Transform _rightHand;
         [SerializeField] private Transform _speakGesturePoint;
-        [SerializeField] private Transform _speakGestureVisualizer;
+        //[SerializeField] private Transform _speakGestureVisualizer;
         [SerializeField] private AppVoiceExperience _appVoiceExperience;
-        [SerializeField] private RigHandsControl _hands;
+        //[SerializeField] private RigHandsControl _hands;
 
         //[Header("Settings")] [SerializeField] private float _sphereCastRadius = 0.1f;
 
@@ -45,7 +45,7 @@ namespace Whisperer
             _castMode,
             _listening;
 
-        [SerializeField] private GameObject _fPrefab;
+        //[SerializeField] private GameObject _fPrefab;
 
         private Vector3 _handsMidPoint;
 
@@ -73,7 +73,9 @@ namespace Whisperer
         }
 
         public Vector3 RaycastDirection { get; private set; }
-        public GameObject ear;
+        public GameObject EarPrefab;
+        private GameObject ear;
+        private HighlightObject[] highlightObjects;
         #region Pose Checking
 
         private void PoseCheck()
@@ -237,9 +239,15 @@ namespace Whisperer
 
         private void SetHandOutline(Transform hand, bool activated)
         {
-            var o = hand.GetComponentInChildren<HighlightObject>();
-            o.HighlightColor = _castMode ? Color.red : new Color(1, 1, 1);
-            o.EnableHighlight(activated);
+                
+            highlightObjects = GetComponentsInChildren<HighlightObject>();
+            foreach(HighlightObject o in highlightObjects)
+            {
+                o.HighlightColor = _castMode ? Color.red : new Color(1, 1, 1);
+                o.EnableHighlight(activated);
+            }
+            //var o = hand.GetComponentInChildren<HighlightObject>();
+
         }
 
         
@@ -268,9 +276,13 @@ namespace Whisperer
         */
         #region Unity Methods
 
-        private void Awake()
+        private void Start()
         {
-            _allowSpeak = false;
+            //_allowSpeak = false;
+            ear = Instantiate(EarPrefab, _rightHand);
+            ear.transform.parent = _rightHand;
+            //print("ear Prefab name:"+ear);
+            ear.SetActive(false);
         }
         /*
         private void Start()

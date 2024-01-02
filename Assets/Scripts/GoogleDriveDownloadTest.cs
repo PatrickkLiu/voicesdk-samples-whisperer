@@ -29,6 +29,9 @@ public class GoogleDriveDownloadTest : MonoBehaviour
     List<string> initialFileIds = new List<string>();
 
 
+    public float sphereRadius = 5f;
+
+
 
 
 // Start is called before the first frame update
@@ -176,10 +179,18 @@ public class GoogleDriveDownloadTest : MonoBehaviour
             var data = customizedPlyImporter.ImportAsCustomPointCloud(stream);
             print(data.positionMap);
             print(data.colorMap);
-            GameObject newVFX = Instantiate(VfxPrefab, transform.position, Quaternion.identity) as GameObject;
+            Vector3 randomPosition = UnityEngine.Random.insideUnitSphere * sphereRadius;
+            GameObject newVFX = Instantiate(VfxPrefab, randomPosition, Quaternion.identity) as GameObject;
             VisualEffect pointcloudvfx = newVFX.GetComponent<VisualEffect>();
             pointcloudvfx.SetTexture("ColorMap",data.colorMap);
             pointcloudvfx.SetTexture("PositionMap",data.positionMap);
+
+            AutoOrbitCamera autoOrbitCamera = FindObjectOfType<AutoOrbitCamera>();
+            if (autoOrbitCamera != null)
+            {
+                autoOrbitCamera.SetNewRandomPosition(randomPosition);
+            }
+
         }
 
 

@@ -30,17 +30,37 @@ public class GoogleDriveDownloadTest : MonoBehaviour
 
 
     public float sphereRadius = 5f;
+    [SerializeField] GameObject displayVFX;
+    NarrativeManagerInstallation narrativeManagerInstallation; // switch between performance and installation using boolean? if true
+    NarrativeManagerPerformance narrativeManagerPerformance;
+    dynamic narrativeManager; 
+    bool performance = false;
 
 
+    void Awake()
+    {
+        customizedPlyImporter = GetComponent<CustomizedPlyImporter>();
+        LoadInitialFileIds();
+        //StartCoroutine(MonitorDriveFolder());
 
-
-// Start is called before the first frame update
+    }
+    // Start is called before the first frame update
     void Start()
     {
         //StartCoroutine("FileDownload");
-        customizedPlyImporter = GetComponent<CustomizedPlyImporter>();
-
-        LoadInitialFileIds();
+        GameObject narrativeObject = GameObject.Find("NarrativeManager");
+        if (narrativeObject != null)
+        {
+            narrativeManagerInstallation = narrativeObject.GetComponent<NarrativeManagerInstallation>();
+            narrativeManagerPerformance = narrativeObject.GetComponent<NarrativeManagerPerformance>();
+            if (narrativeManagerInstallation.enabled) {
+                narrativeManager = narrativeManagerInstallation;
+            }
+            else
+            {
+                narrativeManager = narrativeManagerPerformance;
+            }
+        }
         StartCoroutine(MonitorDriveFolder());
     }
     
@@ -79,7 +99,7 @@ public class GoogleDriveDownloadTest : MonoBehaviour
     }
 
         
-    private IEnumerator MonitorDriveFolder()
+    public IEnumerator MonitorDriveFolder()
     {
         while (true)
         {
@@ -113,11 +133,7 @@ public class GoogleDriveDownloadTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            StartCoroutine("FileDownload");
-            print("keycode pressed");
-        }
+
     }
 
 
@@ -179,11 +195,21 @@ public class GoogleDriveDownloadTest : MonoBehaviour
             var data = customizedPlyImporter.ImportAsCustomPointCloud(stream);
             print(data.positionMap);
             print(data.colorMap);
+            narrativeManager.DisplayObject();
             Vector3 randomPosition = UnityEngine.Random.insideUnitSphere * sphereRadius;
-            GameObject newVFX = Instantiate(VfxPrefab, randomPosition, Quaternion.identity) as GameObject;
-            VisualEffect pointcloudvfx = newVFX.GetComponent<VisualEffect>();
-            pointcloudvfx.SetTexture("ColorMap",data.colorMap);
-            pointcloudvfx.SetTexture("PositionMap",data.positionMap);
+            GameObject StoryVFX = Instantiate(VfxPrefab, randomPosition, Quaternion.identity) as GameObject;
+            VisualEffect storyPointcloud = StoryVFX.GetComponent<VisualEffect>();
+            VisualEffect displayPointcloud = displayVFX.GetComponent<VisualEffect>();
+            storyPointcloud.SetTexture("ColorMap",data.colorMap);
+            storyPointcloud.SetTexture("PositionMap",data.positionMap);
+            displayPointcloud.SetTexture("ColorMap", data.colorMap);
+            displayPointcloud.SetTexture("PositionMap", data.positionMap);
+            displayPointcloud.SendEvent("Start");
+
+
+
+
+
 
             AutoOrbitCamera autoOrbitCamera = FindObjectOfType<AutoOrbitCamera>();
             if (autoOrbitCamera != null)
@@ -197,4 +223,11 @@ public class GoogleDriveDownloadTest : MonoBehaviour
 
 
     }
+
+    void GenerateDisplayObject()
+    {
+
+    }
+
+    
 }

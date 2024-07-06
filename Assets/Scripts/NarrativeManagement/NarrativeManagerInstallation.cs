@@ -1,0 +1,253 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Oculus.Voice;
+using UnityEngine.InputSystem;
+using UnityEngine.VFX;
+using Lasp;
+
+[System.Serializable]
+public class Preset
+{
+    public float R;
+    public float G;
+    public float B;
+    //public float conformForce = 0f;
+    //public float conformX = 0f;
+    //public float conformY = 0f;
+    //public float conformZ = 0f;
+    public AudioClip music;
+}
+
+public class NarrativeManagerInstallation : MonoBehaviour
+{
+    public float R = 0f;
+    public float G = 0f;
+    public float B = 0f;
+    public float AudioLevel = 0f;
+    public float conformForce =0f ;
+    public float conformX = 0f;
+    public float conformY = 0f;
+    public float conformZ = 0f;
+
+    [SerializeField] AudioSource meditationBackground;
+    public float fadeDuration = 5f;
+
+    public AudioSource audioSource;
+    public AudioClip bell;
+    public AudioClip ambient;
+    public AudioClip sex;
+    public AudioClip kickDrum;
+    public AudioClip polymeter;
+
+    public List<Preset> presets;          // List of presets
+
+    AppVoiceExperience appVoiceExperience;
+    RenderChange renderChange;
+
+    [SerializeField] GameObject ritualCircle;
+    [SerializeField] AudioSource sheetInFlux;
+    [SerializeField] AudioSource ritualStart;
+    [SerializeField] AudioSource ritualEnd;
+    [SerializeField] AudioSource loadingBreathing;
+    [SerializeField] AudioSource revealingObject;
+    [SerializeField] VisualEffect displayPointcloud;
+
+    private const float idleThreshold = 10f; // Duration of silence before auto playing scene
+    public AudioLevelTracker audioLevelTracker;
+    float microphoneInput = 0f;
+
+    int index = 0;
+
+    private Coroutine standbyCoroutine;
+    private float silenceTimer = 0f;
+
+    void Start()
+    {
+        GameObject voiceExperienceObject = GameObject.Find("Management");
+        appVoiceExperience = voiceExperienceObject.GetComponent<AppVoiceExperience>();
+        GameObject crossFader = GameObject.Find("CrossFader");
+        renderChange = crossFader.GetComponent<RenderChange>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        microphoneInput = audioLevelTracker.normalizedLevel;
+        //print(microphoneInput);
+
+        if (Input.GetKeyDown("r"))
+        {
+            ResetScene();
+        }
+        if (Input.GetKeyDown("s"))
+        {
+            StartStandby();
+        }
+        if (Input.GetKeyDown("space")) // replace with voice activation
+        {
+            TurningRed();
+            SpeechRecognition();
+            displayPointcloud.SendEvent("Stop");
+
+        }
+    }
+
+    void ResetScene()
+    {
+        audioSource.Stop();
+    }
+
+    #region standby
+
+
+    public void StartStandby()
+    {
+        if (standbyCoroutine != null)
+        {
+            StopCoroutine(standbyCoroutine);
+        }
+        silenceTimer = 0f;
+        standbyCoroutine = StartCoroutine(Standby());
+    }
+
+    public IEnumerator Standby()
+    {
+
+        print("Standby started");
+        renderChange.FadeIn();
+        
+
+        while (true)
+        {
+            if (MicrophoneInputDetected())
+            {
+                print("Input detected");
+                silenceTimer = 0f; // Reset the silence timer if sound is detected
+                TurningRed();
+                SpeechRecognition();
+                displayPointcloud.SendEvent("Stop");
+                yield break; //exit the  standby coroutine
+                //break; // exit the while loop
+            }
+            else
+            {
+                silenceTimer += Time.deltaTime; // Increment the silence timer if no sound is detected
+                print("Silence timer: " + silenceTimer);
+                if (silenceTimer >= idleThreshold)
+                {
+                    print("Idle Limit Hit! silenceTimer = " + silenceTimer);
+                    print("No input for " + idleThreshold + " seconds, standby for too long");
+                    ActivateRandomPreset();
+                    yield break; // Exit the standby coroutine
+                }
+            }
+
+            yield return null; // Wait for the next frame
+        }
+    }
+    #endregion 
+
+
+        
+    bool MicrophoneInputDetected()
+    {
+        return microphoneInput > 0.95f; // Adjust the threshold as needed
+    }
+
+    #region start ritual procedure
+
+    void TurningRed() // start ritual 
+    {
+        ritualCircle.GetComponent<Animation>().Play("TurningRed");
+        ritualStart.Play();
+    }
+    void SpeechRecognition()
+    {
+        appVoiceExperience.Activate();
+        print("listening");
+
+    }
+    public void TurningBlue() // END ritual
+    {
+        ritualCircle.GetComponent<Animation>().Play("TurningBlue");
+        ritualEnd.Play();
+    }
+
+    public void LoadingObject()
+    {
+        StartCoroutine(startLoading());
+    }
+
+    IEnumerator startLoading()
+    {
+        yield return new WaitForSeconds(5.0f);
+        ritualCircle.GetComponent<Animation>().Play("Pulsing");
+        loadingBreathing.Play();
+        yield return new WaitForSeconds(30.0f);
+        ritualCircle.GetComponent<Animation>().Stop("Pulsing");
+    }
+
+
+    public void DisplayObject()
+    {
+        StartCoroutine(startDisplaying());
+    }
+
+    IEnumerator startDisplaying()
+    {
+        ritualCircle.GetComponent<Animation>().Play("RevealingObject");
+        revealingObject.Play();
+        yield return new WaitForSeconds(15.0f);
+        //ActivateRandomPreset();
+        StartStandby();
+
+    }
+
+
+    #endregion
+
+    void SentimentMappedToScene()
+    {
+
+    }
+
+
+
+    void ActivateRandomPreset()
+    {
+        renderChange.FadeOut();
+        if (presets.Count == 0) return; // No presets available
+
+        index = Random.Range(0, presets.Count);
+        Preset selectedPreset = presets[index]; 
+        SceneActivation(selectedPreset.R, selectedPreset.G, selectedPreset.B, selectedPreset.music);
+        
+    }
+
+    void SceneActivation(float red, float green, float blue, AudioClip myAudioClip)
+    {
+        R = red;
+        G = green;
+        B = blue;
+        audioSource.clip = myAudioClip;
+        audioSource.Play();
+        print("preset[" + index + "] is activated");
+        StartCoroutine(countingToStartStandby());
+    }
+
+    IEnumerator countingToStartStandby()
+    {
+        print("counting down to stand by");
+        yield return new WaitForSeconds(30.0f); // wait for the music to end 
+        print("Counting finished");
+        ResetScene();
+        print("Scene Reset");
+        StartStandby();
+
+    }
+    
+
+
+
+}

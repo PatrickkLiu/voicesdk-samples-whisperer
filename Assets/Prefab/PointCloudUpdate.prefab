@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 1243306949}
   - component: {fileID: 1243306956}
   - component: {fileID: 1243306955}
+  - component: {fileID: 585309372854251261}
+  - component: {fileID: 436832636}
+  - component: {fileID: 1085812289391254127}
   m_Layer: 0
   m_Name: PointCloudUpdate
   m_TagString: Untagged
@@ -45,7 +48,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2418108857912481163}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: c422b892b5a32a447a94ef474148db56, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 5861c66020129eb4586e0c313b7f50d3, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -53,7 +56,25 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 60
+        m_Name: AudioGain
+        m_Overridden: 1
+      - m_Value: 1.33
+        m_Name: AudioLevel
+        m_Overridden: 1
+      - m_Value: 1.1
+        m_Name: G
+        m_Overridden: 1
+      - m_Value: 2.04
+        m_Name: R
+        m_Overridden: 1
+      - m_Value: 1.86
+        m_Name: B
+        m_Overridden: 1
+      - m_Value: -0.32
+        m_Name: Size Multiply
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -61,7 +82,10 @@ VisualEffect:
     m_Vector4f:
       m_Array: []
     m_Uint:
-      m_Array: []
+      m_Array:
+      - m_Value: 0
+        m_Name: New uint
+        m_Overridden: 0
     m_Int:
       m_Array: []
     m_Matrix4x4f:
@@ -324,3 +348,40 @@ MonoBehaviour:
   m_MinimumScaleRatio: 0.25
   m_MaximumScaleRatio: 3
   m_ScaleMultiplier: 0.25
+--- !u!114 &585309372854251261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2418108857912481163}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bffdf9d7186e1342bd1b84a7c8f320c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &436832636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2418108857912481163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc7564419f527840a1970d2c6e08bad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 20
+--- !u!114 &1085812289391254127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2418108857912481163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a33da0ad46cca4eba8ac260dc74467, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

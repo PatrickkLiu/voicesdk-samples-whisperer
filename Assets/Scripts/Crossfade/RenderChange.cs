@@ -6,6 +6,7 @@ using UnityEngine.VFX;
 public class RenderChange : MonoBehaviour
 {
     public GameObject renderScreen;
+    //public GameObject renderScreen_Right;
     public bool ringScene = false;
     [SerializeField] AudioSource crossFadeSound;
     [SerializeField] VisualEffect displayPointcloud;
@@ -13,6 +14,7 @@ public class RenderChange : MonoBehaviour
     public void FadeIn()
     {
         renderScreen.GetComponent<Animation>().Play("FadeIn");
+        //renderScreen_Right.GetComponent<Animation>().Play("FadeIn");
         crossFadeSound.Play();
         ringScene = true;
     }
@@ -20,6 +22,7 @@ public class RenderChange : MonoBehaviour
     public void FadeOut()
     {
         renderScreen.GetComponent<Animation>().Play("FadeOut");
+        //renderScreen_Right.GetComponent<Animation>().Play("FadeOut");
         crossFadeSound.Play();
         displayPointcloud.SendEvent("Stop");
         ringScene = false;

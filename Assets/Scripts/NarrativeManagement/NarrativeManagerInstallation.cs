@@ -51,9 +51,11 @@ public class NarrativeManagerInstallation : MonoBehaviour
     [SerializeField] AudioSource ritualEnd;
     [SerializeField] AudioSource loadingBreathing;
     [SerializeField] AudioSource revealingObject;
+    [SerializeField] AudioSource noTranscriptionAudioEffect;
     [SerializeField] VisualEffect displayPointcloud;
 
-    private const float idleThreshold = 10f; // Duration of silence before auto playing scene
+
+    private const float idleThreshold = 15f; // Duration of silence before auto playing scene
     public AudioLevelTracker audioLevelTracker;
     float microphoneInput = 0f;
 
@@ -91,6 +93,11 @@ public class NarrativeManagerInstallation : MonoBehaviour
             displayPointcloud.SendEvent("Stop");
 
         }
+        if (Input.GetKeyDown("p"))
+        {
+            ActivateRandomPreset();
+        }
+
     }
 
     void ResetScene()
@@ -115,7 +122,11 @@ public class NarrativeManagerInstallation : MonoBehaviour
     {
 
         print("Standby started");
-        renderChange.FadeIn();
+        if (!renderChange.ringScene)
+        {
+            renderChange.FadeIn();
+        }
+
         
 
         while (true)
@@ -133,7 +144,7 @@ public class NarrativeManagerInstallation : MonoBehaviour
             else
             {
                 silenceTimer += Time.deltaTime; // Increment the silence timer if no sound is detected
-                print("Silence timer: " + silenceTimer);
+                //print("Silence timer: " + silenceTimer);
                 if (silenceTimer >= idleThreshold)
                 {
                     print("Idle Limit Hit! silenceTimer = " + silenceTimer);
@@ -152,7 +163,7 @@ public class NarrativeManagerInstallation : MonoBehaviour
         
     bool MicrophoneInputDetected()
     {
-        return microphoneInput > 0.95f; // Adjust the threshold as needed
+        return microphoneInput > 0.99f; // Adjust the threshold as needed
     }
 
     #region start ritual procedure
@@ -172,6 +183,21 @@ public class NarrativeManagerInstallation : MonoBehaviour
     {
         ritualCircle.GetComponent<Animation>().Play("TurningBlue");
         ritualEnd.Play();
+    }
+
+    public void NoTranscription() 
+    {
+        StartCoroutine(WaitForRitualToEndAndStartStandby());
+    }
+    IEnumerator WaitForRitualToEndAndStartStandby()
+    {
+        print("Waiting for ritual to end");
+        yield return new WaitForSeconds(4.0f);
+        print("ritual ended");
+        noTranscriptionAudioEffect.Play();
+        ritualCircle.GetComponent<Animation>().Play("NoTranscription");
+        yield return new WaitForSeconds(2.0f);
+        StartStandby();
     }
 
     public void LoadingObject()
@@ -199,8 +225,8 @@ public class NarrativeManagerInstallation : MonoBehaviour
         ritualCircle.GetComponent<Animation>().Play("RevealingObject");
         revealingObject.Play();
         yield return new WaitForSeconds(15.0f);
-        //ActivateRandomPreset();
-        StartStandby();
+        ActivateRandomPreset();
+        //StartStandby();
 
     }
 
@@ -233,14 +259,17 @@ public class NarrativeManagerInstallation : MonoBehaviour
         audioSource.clip = myAudioClip;
         audioSource.Play();
         print("preset[" + index + "] is activated");
-        StartCoroutine(countingToStartStandby());
+        StartCoroutine(WaitForMusicToEndAndStartStandby());
     }
 
-    IEnumerator countingToStartStandby()
+    IEnumerator WaitForMusicToEndAndStartStandby()
     {
-        print("counting down to stand by");
-        yield return new WaitForSeconds(30.0f); // wait for the music to end 
-        print("Counting finished");
+        print("Waiting for music to end");
+        while (audioSource.isPlaying)
+        {
+            yield return null; // wait until next frame
+        }
+        print("Music ended");
         ResetScene();
         print("Scene Reset");
         StartStandby();

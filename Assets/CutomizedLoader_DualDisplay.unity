@@ -2042,34 +2042,30 @@ MonoBehaviour:
     G: 0
     B: -1
     music: {fileID: 8300000, guid: b643fdbdf86669c4aa21b33d0dc9c0ac, type: 3}
-  - R: 18
+  - R: 3
     G: 0.5
-    B: -1
+    B: 4
     music: {fileID: 8300000, guid: 40dff55c9fe4f62478cde90b28364591, type: 3}
   - R: 30
     G: 10
     B: 20
     music: {fileID: 8300000, guid: 3b8e2997062ac694ab910d174d4ea998, type: 3}
-  - R: 10
-    G: 10
-    B: 20
+  - R: 0
+    G: 0.5
+    B: 10
     music: {fileID: 8300000, guid: e4e4e878d712a30428587f5c469f33c6, type: 3}
   - R: 0.5
     G: -1
     B: 0.5
     music: {fileID: 8300000, guid: 8d475dc7505d4d94e960a6246f4e515d, type: 3}
-  - R: 3
-    G: 3
-    B: 3
+  - R: 6
+    G: -1
+    B: -0.8
     music: {fileID: 8300000, guid: 701947e7d63c2d14884f93a25da843c7, type: 3}
-  - R: 3
+  - R: 15
     G: 3
-    B: 3
+    B: 0.8
     music: {fileID: 8300000, guid: 2315a14a8c4e3f241a45445dbf44060a, type: 3}
-  - R: 3
-    G: 3
-    B: 3
-    music: {fileID: 8300000, guid: b5608ddcb02440e46a2024a8b89506eb, type: 3}
   ritualCircle: {fileID: 6641736}
   sheetInFlux: {fileID: 1113599778}
   ritualStart: {fileID: 626163578}
@@ -2077,7 +2073,9 @@ MonoBehaviour:
   loadingBreathing: {fileID: 1058381817}
   revealingObject: {fileID: 1895811052}
   noTranscriptionAudioEffect: {fileID: 2038402509}
+  whisperingInstruction: {fileID: 1094250395}
   displayPointcloud: {fileID: 436832628}
+  ring: {fileID: 6641738}
   audioLevelTracker: {fileID: 1764802904}
 --- !u!1 &960368953
 GameObject:
@@ -2465,6 +2463,134 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 54c7defeaad8f384892cf73b6e9166e3, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &1094250393
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1094250394}
+  - component: {fileID: 1094250395}
+  m_Layer: 0
+  m_Name: WhisperInstruction
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1094250394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094250393}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1805668325}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1094250395
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094250393}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 55a165984265d8f47b525d0684afdf02, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4274,7 +4400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useDefaultDevice: 0
-  _deviceID: '{0.0.1.00000000}.{a06e5d31-304e-484b-96f3-8517ef908a99}'
+  _deviceID: '{0.0.1.00000000}.{f8c08939-7173-4747-8f63-160c786c2aa4}'
   _channel: 0
   _filterType: 3
   _autoGain: 1
@@ -4328,6 +4454,7 @@ Transform:
   - {fileID: 791753605}
   - {fileID: 1113599777}
   - {fileID: 2038402508}
+  - {fileID: 1094250394}
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23509,7 +23636,7 @@ PrefabInstance:
     - target: {fileID: 2703852736297538071, guid: a0807cb156d9f5e48be02bd4c5ea7827, type: 3}
       propertyPath: events.OnStoppedListening.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 892949784}
+      objectReference: {fileID: 892949786}
     - target: {fileID: 2703852736297538071, guid: a0807cb156d9f5e48be02bd4c5ea7827, type: 3}
       propertyPath: events.OnStoppedListening.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -23856,7 +23983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2703852736297538071, guid: a0807cb156d9f5e48be02bd4c5ea7827, type: 3}
       propertyPath: events.OnStoppedListening.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: NarrativeManager, Assembly-CSharp
+      value: NarrativeManagerInstallation, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2703852736297538071, guid: a0807cb156d9f5e48be02bd4c5ea7827, type: 3}
       propertyPath: events.OnStoppedListening.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName

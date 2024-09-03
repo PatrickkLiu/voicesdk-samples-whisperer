@@ -41,6 +41,8 @@ public class NarrativeManagerInstallation : MonoBehaviour
     public AudioClip polymeter;
 
     public List<Preset> presets;          // List of presets
+    int index = 0;
+    int lastIndex = -1;             // Initialize the last preset index played with an invalid index
 
     AppVoiceExperience appVoiceExperience;
     RenderChange renderChange;
@@ -52,14 +54,16 @@ public class NarrativeManagerInstallation : MonoBehaviour
     [SerializeField] AudioSource loadingBreathing;
     [SerializeField] AudioSource revealingObject;
     [SerializeField] AudioSource noTranscriptionAudioEffect;
+    [SerializeField] AudioSource whisperingInstruction;
     [SerializeField] VisualEffect displayPointcloud;
+    [SerializeField] VisualEffect ring;
 
 
     private const float idleThreshold = 15f; // Duration of silence before auto playing scene
     public AudioLevelTracker audioLevelTracker;
     float microphoneInput = 0f;
 
-    int index = 0;
+
 
     private Coroutine standbyCoroutine;
     private float silenceTimer = 0f;
@@ -97,6 +101,12 @@ public class NarrativeManagerInstallation : MonoBehaviour
         {
             ActivateRandomPreset();
         }
+        if (Input.GetKeyDown("1"))
+        {
+            SceneActivation(presets[0].R, presets[0].G, presets[0].B, presets[0].music);
+        }
+        
+
 
     }
 
@@ -126,8 +136,9 @@ public class NarrativeManagerInstallation : MonoBehaviour
         {
             renderChange.FadeIn();
         }
+        whisperingInstruction.Play();
 
-        
+
 
         while (true)
         {
@@ -135,6 +146,7 @@ public class NarrativeManagerInstallation : MonoBehaviour
             {
                 print("Input detected");
                 silenceTimer = 0f; // Reset the silence timer if sound is detected
+                whisperingInstruction.Stop();
                 TurningRed();
                 SpeechRecognition();
                 displayPointcloud.SendEvent("Stop");
@@ -157,10 +169,9 @@ public class NarrativeManagerInstallation : MonoBehaviour
             yield return null; // Wait for the next frame
         }
     }
-    #endregion 
+    #endregion
 
 
-        
     bool MicrophoneInputDetected()
     {
         return microphoneInput > 0.99f; // Adjust the threshold as needed
@@ -172,6 +183,7 @@ public class NarrativeManagerInstallation : MonoBehaviour
     {
         ritualCircle.GetComponent<Animation>().Play("TurningRed");
         ritualStart.Play();
+        ring.SetFloat("RingForceMin", 4f);
     }
     void SpeechRecognition()
     {
@@ -181,8 +193,12 @@ public class NarrativeManagerInstallation : MonoBehaviour
     }
     public void TurningBlue() // END ritual
     {
+        print("turn blue");
         ritualCircle.GetComponent<Animation>().Play("TurningBlue");
+        ring.SetFloat("RingForceMin", -3f);
+        print("force set");
         ritualEnd.Play();
+
     }
 
     public void NoTranscription() 
@@ -245,7 +261,15 @@ public class NarrativeManagerInstallation : MonoBehaviour
         renderChange.FadeOut();
         if (presets.Count == 0) return; // No presets available
 
-        index = Random.Range(0, presets.Count);
+        do
+        {
+            index = Random.Range(0, presets.Count);
+        }
+        while (index == lastIndex && presets.Count > 1); // Ensure the new index is different from the last one
+
+        lastIndex = index; // Update the last index to the current one
+
+
         Preset selectedPreset = presets[index]; 
         SceneActivation(selectedPreset.R, selectedPreset.G, selectedPreset.B, selectedPreset.music);
         

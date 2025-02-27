@@ -34,25 +34,25 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.3
+    m_Value: 0.1
   intensity:
     m_OverrideState: 1
-    m_Value: 22.19
+    m_Value: 123.8
   scatter:
     m_OverrideState: 1
-    m_Value: 0.957
+    m_Value: 1
   clamp:
     m_OverrideState: 1
-    m_Value: 65472
+    m_Value: 0
   tint:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   skipIterations:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   dirtTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -302,7 +302,7 @@ MonoBehaviour:
     m_Value: 1
   clamp:
     m_OverrideState: 1
-    m_Value: 0.05
+    m_Value: 0.179
 --- !u!114 &-2390736526722585385
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -392,19 +392,19 @@ MonoBehaviour:
     m_Value: 2
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 21.93
+    m_Value: 51.14
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 32.83
+    m_Value: 54.2
   gaussianMaxRadius:
     m_OverrideState: 1
-    m_Value: 0.911
+    m_Value: 1.06
   highQualitySampling:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   focusDistance:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 30.16
   aperture:
     m_OverrideState: 1
     m_Value: 1
@@ -435,7 +435,7 @@ MonoBehaviour:
   active: 0
   type:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 2
   intensity:
     m_OverrideState: 1
     m_Value: 1
@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfbdbb87d3286943a057f7791b43141, type: 3}
   m_Name: ChannelMixer
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   redOutRedIn:
     m_OverrideState: 1
     m_Value: 200
@@ -606,7 +606,7 @@ MonoBehaviour:
   active: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.158
+    m_Value: 0.17
 --- !u!114 &8133164777306422647
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -644,7 +644,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0
   xMultiplier:
     m_OverrideState: 1
     m_Value: 0
@@ -656,4 +656,4 @@ MonoBehaviour:
     m_Value: {x: 0, y: 0}
   scale:
     m_OverrideState: 1
-    m_Value: 0.68
+    m_Value: 0.01
